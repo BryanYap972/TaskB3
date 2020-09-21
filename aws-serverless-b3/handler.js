@@ -26,7 +26,7 @@ module.exports.create = (event, context, callback) => {
         callback(null, {
           statusCode: err.statusCode || 500,
           headers: { "Content-Type": "text/plain" },
-          body: "Could'nt add user.",
+          body: "Could not add user.",
         })
       );
   });
