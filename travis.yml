@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "10"
+deploy_service_job: &DEPLOY_SERVICE_JOB
+  cache:
+    directories:
+      - node_modules
+      - ./aws-serverless-b3/node_modules
+install:
+  - npm install -g serverless
+  - travis_retry npm install
+  - cd ./aws-serverless-b3
+  - travis_retry npm install
+  - cd -
+script:
+  - cd ./aws-serverless-b3
+  - npm test
+  - serverless deploy
+  - cd -
