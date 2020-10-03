@@ -6,6 +6,12 @@ const User = require("./user.model.js");
 
 require("dotenv").config({ path: "./variables.env" });
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
+};
+
 module.exports.hello = (event, context, callback) => {
   console.log("Hello World");
   callback(null, "Hello World");
@@ -20,6 +26,7 @@ module.exports.create = (event, context, callback) => {
         callback(null, {
           statusCode: 200,
           body: JSON.stringify(user),
+          headers: corsHeaders,
         })
       )
       .catch((err) =>
@@ -41,13 +48,14 @@ module.exports.getAll = (event, context, callback) => {
         callback(null, {
           statusCode: 200,
           body: JSON.stringify(users),
+          headers: corsHeaders,
         })
       )
       .catch((err) =>
         callback(null, {
           statusCode: err.statusCode || 500,
           headers: { "Content-Type": "text/plain" },
-          body: "Could not fetch users.",
+          body: "Couldn't fetch users.",
         })
       );
   });
@@ -64,6 +72,7 @@ module.exports.update = (event, context, callback) => {
         callback(null, {
           statusCode: 200,
           body: JSON.stringify(user),
+          headers: corsHeaders,
         })
       )
       .catch((err) =>
@@ -88,6 +97,7 @@ module.exports.delete = (event, context, callback) => {
             message: "Removed user with id: " + user._id,
             user: user,
           }),
+          headers: corsHeaders,
         })
       )
       .catch((err) =>
