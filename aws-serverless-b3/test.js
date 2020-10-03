@@ -18,7 +18,6 @@ describe("Tests", () => {
           .get("/users")
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.length).to.equal(3);
             console.log(id);
             done();
           });

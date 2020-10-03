@@ -55,7 +55,7 @@ module.exports.getAll = (event, context, callback) => {
         callback(null, {
           statusCode: err.statusCode || 500,
           headers: { "Content-Type": "text/plain" },
-          body: "Couldn't fetch users.",
+          body: "Could not fetch users.",
         })
       );
   });
